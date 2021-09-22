@@ -106,7 +106,11 @@ function cardCharge() {
         }
         sleep(100);
 
-        smartClick(text("使用密码").findOne(3000));
+        if (textContains("立即付款").findOne(3000)) {
+            smartClick(text("立即付款").findOne(3000));
+        } else {
+            smartClick(text("使用密码").findOne(3000));
+        }
         if (!text("请输入支付密码").findOne(10 * 1000)) {
             console.trace("round%d failed at : ", round);
             continue;
