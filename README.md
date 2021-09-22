@@ -1,2 +1,3 @@
 # weChatEpidemicReport_BUPT
  北京邮电大学的自动化疫情填报脚本
+ 限安卓手机，需要autojs软件解析并运行脚本，可搭配tasker等软件定时运行脚本
