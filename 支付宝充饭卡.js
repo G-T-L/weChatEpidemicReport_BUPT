@@ -144,7 +144,7 @@ function cardCharge() {
     smartClick(textContains("天天充值券").findOne(3000));
     sleep(3000);
     textContains("领取 x").findOne(10 * 1000);
-    if (!textContains("做充值任务 再领券哦").findOne(1000)) {
+    if (!textContains("做充值任务").findOne(1000)) {
         sleep(3000);
         let myreg = new RegExp("\\d{1,3}", "g");
         let regArray = myreg.exec(textContains("领取 x").findOne(1000).text());
