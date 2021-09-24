@@ -7,7 +7,7 @@ let chargedCounts = 0;
 let couponsCollected = 0;
 let totalChargedCounts = 0;
 let totalCouponsCollected = 0;
-var toChargeCounts = 99; //by default
+var toChargeCounts = 54; //by default
 var debugMode = false; //enable to quickly go through sections
 var deviceUnlocker = require("解锁屏幕.js");
 var isScreenNeedToBeLocked;
@@ -26,6 +26,7 @@ if (storage.get("lastRanDate") == new Date().getDate()) {
     storage.put("totalCouponsCollected", 0);
     storage.put("lastRanDate", new Date().getDate());
 }
+toChargeCounts = 54 - totalChargedCounts;
 unlockAndEnterMainSession();
 thread_main_monitor = threads.start(thread_main_monitor_enable);
 
@@ -67,8 +68,6 @@ function cardCharge() {
 
     if (debugMode) {
         toChargeCounts = 3;
-    } else {
-        toChargeCounts = 99 - totalChargedCounts;
     }
     toastLog("rounds left: " + toChargeCounts.toString());
     for (let round = 0; round < toChargeCounts; round++) {
@@ -145,8 +144,10 @@ function cardCharge() {
     }
 
     sleep(3000);
-    smartClick(textContains("天天充值券").findOne(3000));
-    sleep(3000);
+    smartClick(textContains("新生领").findOne(3000));
+    sleep(5000);
+    click(device.width / 2, device.height - (device.height * (2400 - 1700)) / 2400);
+    sleep(5000);
     textContains("领取 x").findOne(10 * 1000);
     if (!textContains("做充值任务").findOne(1000)) {
         sleep(3000);
@@ -277,7 +278,7 @@ function unlockAndEnterMainSession() {
                     console.info("opration aborted mannually");
                     exit();
                 } else if (action == "neutral") {
-                    toChargeCounts = dialogs.input("充值次数:", "3");
+                    toChargeCounts = dialogs.input("充值次数:", "0");
                     thread_main = threads.start(cardCharge);
                 }
             })
